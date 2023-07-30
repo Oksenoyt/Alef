@@ -10,14 +10,11 @@ import UIKit
 final class RegistrationViewController: UIViewController {
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
-    private let personStackView = UIStackView()
+    private let personStackView = TextFieldStackView(type: 1)
 
-    private let nameTextField = RegisterTextField(placeholder: "Имя")
-    private let middleNameTextField = RegisterTextField(placeholder: "Фамилия")
-    private let surnameTextField = RegisterTextField(placeholder: "Отчество")
-    private let ageTextField = RegisterTextField(placeholder: "Полных лет")
+    private let addButton = AddButton()
 
-    private let addButton = UIButton()
+    private var childStackViews: [TextFieldStackView] = []
 
     //    private lazy var scrollView: UIScrollView = {
     //        let scrollView = UIScrollView()
@@ -46,6 +43,20 @@ final class RegistrationViewController: UIViewController {
         super.viewDidLoad()
         sutupView()
     }
+
+    func addActionToAddButton() {
+        addButton.addTarget(self, action: #selector(addChildStackView), for: .touchUpInside)
+    }
+
+    @objc func addChildStackView() {
+        let newStackView = TextFieldStackView(type: 2)
+        view.addSubview(newStackView)
+        childStackViews.append(newStackView)
+        setupChildTextFieldStackConstraints()
+        if childStackViews.count == 5 {
+            addButton.isHidden = true
+        }
+    }
 }
 
 //MARK: Setting
@@ -58,7 +69,7 @@ private extension RegistrationViewController {
         setupSubViewSubTitle()
 
         view.addSubview(addButton)
-        settingsForButton()
+        addActionToAddButton()
         setupAddButtonConstraints()
     }
 
@@ -70,20 +81,6 @@ private extension RegistrationViewController {
         title.textColor = #colorLiteral(red: 0.862745098, green: 0.4862745098, blue: 0.2823529412, alpha: 1)
     }
 
-    func settings(for stackView: UIStackView) {
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        stackView.distribution = .fillEqually
-    }
-
-    func settingsForButton() {
-        let image = UIImage(systemName: "plus.circle.fill")
-        addButton.setImage(image, for: .normal)
-        addButton.tintColor = #colorLiteral(red: 0.368627451, green: 0.5764705882, blue: 0.6117647059, alpha: 1)
-        let scale: CGFloat = 2
-        addButton.transform = CGAffineTransform(scaleX: scale, y: scale)
-    }
-
 }
 
 //MARK: addSubViews
@@ -92,11 +89,6 @@ private extension RegistrationViewController {
         //        view.addSubview(scrollView)
         //        scrollView.addSubview(contentView)
         view.addSubview(personStackView)
-        personStackView.addArrangedSubview(nameTextField)
-        personStackView.addArrangedSubview(middleNameTextField)
-        personStackView.addArrangedSubview(surnameTextField)
-        personStackView.addArrangedSubview(ageTextField)
-        settings(for: personStackView)
         setupPersonTextFieldStackConstraints()
     }
 
@@ -111,8 +103,6 @@ private extension RegistrationViewController {
         settingsForTitle(title: subTitleLabel, text: "Информация о детях", font: 22)
         setupSubTitleLableConstraints()
     }
-
-
 }
 
 //MARK: Layout
@@ -131,8 +121,8 @@ private extension RegistrationViewController {
         NSLayoutConstraint.activate([
             personStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             personStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            personStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-//            personStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -20)
+            //            personStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+            personStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:330 )
         ])
     }
 
@@ -148,7 +138,19 @@ private extension RegistrationViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
-            addButton.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 20)
+            addButton.topAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: 0)
         ])
+    }
+
+    func setupChildTextFieldStackConstraints() {
+        for stackView in childStackViews {
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+                stackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
+            ])
+        }
+
     }
 }
