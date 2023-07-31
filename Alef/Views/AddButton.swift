@@ -8,9 +8,9 @@
 import UIKit
 
 final class AddButton: UIButton {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupButton()
+    init(image: String) {
+        super.init(frame: .zero)
+        setupButton(with: image)
     }
     
 
@@ -19,8 +19,8 @@ final class AddButton: UIButton {
     }
 
 
-    func setupButton() {
-        let image = UIImage(systemName: "plus.circle.fill")
+    func setupButton(with image: String) {
+        let image = UIImage(systemName: image)
         let scale: CGFloat = 2
         setImage(image, for: .normal)
         tintColor = #colorLiteral(red: 0.368627451, green: 0.5764705882, blue: 0.6117647059, alpha: 1)

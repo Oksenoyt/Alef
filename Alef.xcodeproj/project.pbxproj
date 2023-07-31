@@ -18,7 +18,6 @@
 		4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D52A75B949004074C5 /* RegisterTextField.swift */; };
 		4204F5D82A76EDB2004074C5 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D72A76EDB2004074C5 /* AddButton.swift */; };
 		4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */; };
-		4204F6002A77559E004074C5 /* hild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5FF2A77559E004074C5 /* hild.swift */; };
 		4204F6022A7755BF004074C5 /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F6012A7755BF004074C5 /* ChildView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +54,6 @@
 		4204F5D52A75B949004074C5 /* RegisterTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextField.swift; sourceTree = "<group>"; };
 		4204F5D72A76EDB2004074C5 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
-		4204F5FF2A77559E004074C5 /* hild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hild.swift; sourceTree = "<group>"; };
 		4204F6012A7755BF004074C5 /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,17 +105,13 @@
 		4204F5A42A7599C8004074C5 /* Alef */ = {
 			isa = PBXGroup;
 			children = (
+				42301E4D2A7846CB001922E3 /* ViewControllers */,
+				42301E4E2A7846E9001922E3 /* Views */,
 				4204F5A52A7599C9004074C5 /* AppDelegate.swift */,
 				4204F5A72A7599C9004074C5 /* SceneDelegate.swift */,
-				4204F5A92A7599C9004074C5 /* RegistrationViewController.swift */,
 				4204F5AE2A7599CA004074C5 /* Assets.xcassets */,
 				4204F5B02A7599CA004074C5 /* LaunchScreen.storyboard */,
 				4204F5B32A7599CA004074C5 /* Info.plist */,
-				4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */,
-				4204F5D52A75B949004074C5 /* RegisterTextField.swift */,
-				4204F5D72A76EDB2004074C5 /* AddButton.swift */,
-				4204F5FF2A77559E004074C5 /* hild.swift */,
-				4204F6012A7755BF004074C5 /* ChildView.swift */,
 			);
 			path = Alef;
 			sourceTree = "<group>";
@@ -137,6 +131,25 @@
 				4204F5C82A7599CB004074C5 /* AlefUITestsLaunchTests.swift */,
 			);
 			path = AlefUITests;
+			sourceTree = "<group>";
+		};
+		42301E4D2A7846CB001922E3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4204F5A92A7599C9004074C5 /* RegistrationViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		42301E4E2A7846E9001922E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */,
+				4204F5D72A76EDB2004074C5 /* AddButton.swift */,
+				4204F6012A7755BF004074C5 /* ChildView.swift */,
+				4204F5D52A75B949004074C5 /* RegisterTextField.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +284,6 @@
 			files = (
 				4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */,
 				4204F6022A7755BF004074C5 /* ChildView.swift in Sources */,
-				4204F6002A77559E004074C5 /* hild.swift in Sources */,
 				4204F5AA2A7599C9004074C5 /* RegistrationViewController.swift in Sources */,
 				4204F5A62A7599C9004074C5 /* AppDelegate.swift in Sources */,
 				4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */,

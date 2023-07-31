@@ -12,7 +12,7 @@ final class RegistrationViewController: UIViewController {
     private let subTitleLabel = UILabel()
     private let personStackView = TextFieldStackView(type: 1)
 
-    private let addButton = AddButton()
+    private let addButton = AddButton(image: "plus.circle.fill")
 
     private var childStackViews: [ChildView] = []
 
@@ -55,11 +55,26 @@ final class RegistrationViewController: UIViewController {
     }
 
     @objc func addChildStackView() {
-        let newStackView = ChildView()
-        childrenStackView.addArrangedSubview(newStackView)
-        childStackViews.append(newStackView)
+        let newChildStackView = ChildView()
+        childrenStackView.addArrangedSubview(newChildStackView)
+        childStackViews.append(newChildStackView)
+        newChildStackView.deleteButton.addTarget(self, action: #selector(deleteChild(_:)), for: .touchUpInside)
         if childStackViews.count == 5 {
             addButton.isHidden = true
+        }
+    }
+
+    @objc private func deleteChild(_ sender: UIButton) {
+        if let childInfoView = sender.superview as? ChildView {
+            childrenStackView.removeArrangedSubview(childInfoView)
+            childInfoView.removeFromSuperview()
+            if let index = childStackViews.firstIndex(of: childInfoView) {
+                childStackViews.remove(at: index)
+            }
+
+            if childStackViews.count < 5 {
+                addButton.isHidden = false
+            }
         }
     }
 }
@@ -117,8 +132,8 @@ private extension RegistrationViewController {
     func setupTitleLableConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
         ])
     }
@@ -126,8 +141,8 @@ private extension RegistrationViewController {
     func setupPersonTextFieldStackConstraints() {
         personStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            personStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            personStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            personStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            personStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             //            personStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
             personStackView.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant:330 )
         ])
@@ -136,7 +151,7 @@ private extension RegistrationViewController {
     func setupSubTitleLableConstraints() {
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            subTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25),
+            subTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 21),
             subTitleLabel.topAnchor.constraint(equalTo: personStackView.bottomAnchor, constant: 25),
         ])
     }
@@ -144,7 +159,7 @@ private extension RegistrationViewController {
     func setupAddButtonConstraints() {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addButton.topAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: 0)
         ])
     }
@@ -152,8 +167,8 @@ private extension RegistrationViewController {
     func setupChildTextFieldStackConstraints() {
             childrenStackView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-                childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+                childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
                 childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
             ])
         }

@@ -12,13 +12,13 @@ final class ChildView: UIView {
     private let nameTextField = RegisterTextField(placeholder: "Имя ребенка")
     private let ageTextField = RegisterTextField(placeholder: "лет")
 
-    private lazy var deleteButton: UIButton = {
+    lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Удалить ребенка", for: .normal)
+        button.setTitle("удалить ребенка", for: .normal)
         button.setTitleColor( #colorLiteral(red: 0.368627451, green: 0.5764705882, blue: 0.6117647059, alpha: 1), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         return button
      }()
-
 
     init() {
         super.init(frame: .zero)
@@ -44,13 +44,13 @@ final class ChildView: UIView {
         NSLayoutConstraint.activate([
             nameTextField.topAnchor.constraint(equalTo: topAnchor),
             nameTextField.leadingAnchor.constraint(equalTo: leadingAnchor),
-            nameTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.68),
+            nameTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.66),
 
             ageTextField.topAnchor.constraint(equalTo: topAnchor),
             ageTextField.trailingAnchor.constraint(equalTo: trailingAnchor),
             ageTextField.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3),
 
-            deleteButton.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 8),
+            deleteButton.topAnchor.constraint(equalTo: ageTextField.bottomAnchor, constant: 3),
             deleteButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             deleteButton.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
