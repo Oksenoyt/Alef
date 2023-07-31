@@ -17,6 +17,10 @@ final class RegistrationViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.frame = view.bounds
         scrollView.contentSize = contentSize
+
+        // Если iOS 11 и выше, установите поведение для скролла с автоматической регулировкой контента
+//           scrollView.contentInsetAdjustmentBehavior = .automatic
+
         return scrollView
     }()
 
@@ -44,8 +48,18 @@ final class RegistrationViewController: UIViewController {
         return button
     }()
 
+    lazy var cleanButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Очистить форму", for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.backgroundColor = #colorLiteral(red: 0.368627451, green: 0.5764705882, blue: 0.6117647059, alpha: 1)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+
     private var contentSize: CGSize {
-        CGSize(width: view.frame.width, height: view.frame.height + 230)
+        CGSize(width: view.frame.width, height: view.frame.height + 220)
     }
 
     override func viewDidLoad() {
@@ -59,7 +73,7 @@ final class RegistrationViewController: UIViewController {
         addButton.addTarget(self, action: #selector(addChildView), for: .touchUpInside)
     }
 
-    @objc func addChildView() {
+    @objc private func addChildView() {
         let newChildView = ChildView()
         childrenStackView.addArrangedSubview(newChildView)
         childViews.append(newChildView)
@@ -96,6 +110,7 @@ private extension RegistrationViewController {
 
         contentView.addSubview(childrenStackView)
         setupChildTextFieldStackConstraints()
+        setupSubViewCleanButton()
     }
 
     func settingsForTitle(title: UILabel,text: String, font: Int ) {
@@ -131,6 +146,13 @@ private extension RegistrationViewController {
         addActionToAddButton()
         setupAddButtonConstraints()
     }
+
+    func setupSubViewCleanButton() {
+        contentView.addSubview(cleanButton)
+        //        addActionToAddButton()
+        setupCleanButtonConstraints()
+    }
+
 }
 
 //MARK: Layout
@@ -170,12 +192,22 @@ private extension RegistrationViewController {
     }
 
     func setupChildTextFieldStackConstraints() {
-            childrenStackView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
-            ])
-        }
-
+        childrenStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
+        ])
     }
+
+    func setupCleanButtonConstraints() {
+        cleanButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cleanButton.heightAnchor.constraint(equalToConstant: 50),
+            cleanButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            cleanButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            cleanButton.topAnchor.constraint(equalTo: childrenStackView.bottomAnchor, constant: 35)
+        ])
+    }
+
+}
