@@ -10,11 +10,8 @@ import UIKit
 final class RegistrationViewController: UIViewController {
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
-    private let personStackView = TextFieldStackView(type: 1)
-
-    private let addButton = AddButton(image: "plus.circle.fill")
-
-    private var childStackViews: [ChildView] = []
+    private let personStackView = PersonStackView()
+    private var childViews: [ChildView] = []
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -30,15 +27,21 @@ final class RegistrationViewController: UIViewController {
         return contentView
     }()
 
-    //    private let personStackView: UIStackView = {
-    //        let stackView = UIStackView()
-    //    }()
-
     private lazy var childrenStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 16
         return stackView
+    }()
+
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(systemName:  "plus.circle.fill")
+        let scale: CGFloat = 2
+        button.setImage(image, for: .normal)
+        button.tintColor = #colorLiteral(red: 0.368627451, green: 0.5764705882, blue: 0.6117647059, alpha: 1)
+        button.transform = CGAffineTransform(scaleX: scale, y: scale)
+        return button
     }()
 
     private var contentSize: CGSize {
@@ -48,31 +51,32 @@ final class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sutupView()
+        view.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1)
+
     }
 
-    func addActionToAddButton() {
-        addButton.addTarget(self, action: #selector(addChildStackView), for: .touchUpInside)
+    private func addActionToAddButton() {
+        addButton.addTarget(self, action: #selector(addChildView), for: .touchUpInside)
     }
 
-    @objc func addChildStackView() {
-        let newChildStackView = ChildView()
-        childrenStackView.addArrangedSubview(newChildStackView)
-        childStackViews.append(newChildStackView)
-        newChildStackView.deleteButton.addTarget(self, action: #selector(deleteChild(_:)), for: .touchUpInside)
-        if childStackViews.count == 5 {
+    @objc func addChildView() {
+        let newChildView = ChildView()
+        childrenStackView.addArrangedSubview(newChildView)
+        childViews.append(newChildView)
+        newChildView.deleteButton.addTarget(self, action: #selector(deleteChild(_:)), for: .touchUpInside)
+        if childViews.count == 5 {
             addButton.isHidden = true
         }
     }
 
     @objc private func deleteChild(_ sender: UIButton) {
-        if let childInfoView = sender.superview as? ChildView {
-            childrenStackView.removeArrangedSubview(childInfoView)
-            childInfoView.removeFromSuperview()
-            if let index = childStackViews.firstIndex(of: childInfoView) {
-                childStackViews.remove(at: index)
+        if let childView = sender.superview as? ChildView {
+            childrenStackView.removeArrangedSubview(childView)
+            childView.removeFromSuperview()
+            if let index = childViews.firstIndex(of: childView) {
+                childViews.remove(at: index)
             }
-
-            if childStackViews.count < 5 {
+            if childViews.count < 5 {
                 addButton.isHidden = false
             }
         }
@@ -82,15 +86,14 @@ final class RegistrationViewController: UIViewController {
 //MARK: Setting
 private extension RegistrationViewController {
     func sutupView() {
-        view.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
 
-        addSubViewsForPersonStackView()
+        setupSubViewsPersonStackView()
         setupSubViewTitle()
         setupSubViewSubTitle()
+        setupSubViewAddButton()
 
-        contentView.addSubview(addButton)
-        addActionToAddButton()
-        setupAddButtonConstraints()
         contentView.addSubview(childrenStackView)
         setupChildTextFieldStackConstraints()
     }
@@ -102,16 +105,13 @@ private extension RegistrationViewController {
         title.numberOfLines = 0
         title.textColor = #colorLiteral(red: 0.862745098, green: 0.4862745098, blue: 0.2823529412, alpha: 1)
     }
-
 }
 
 //MARK: addSubViews
 private extension RegistrationViewController {
-    func addSubViewsForPersonStackView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+    func setupSubViewsPersonStackView() {
         contentView.addSubview(personStackView)
-        setupPersonTextFieldStackConstraints()
+        setupPersonStackConstraints()
     }
 
     func setupSubViewTitle() {
@@ -125,6 +125,12 @@ private extension RegistrationViewController {
         settingsForTitle(title: subTitleLabel, text: "Информация о детях", font: 22)
         setupSubTitleLableConstraints()
     }
+
+    func setupSubViewAddButton() {
+        contentView.addSubview(addButton)
+        addActionToAddButton()
+        setupAddButtonConstraints()
+    }
 }
 
 //MARK: Layout
@@ -134,16 +140,15 @@ private extension RegistrationViewController {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16)
         ])
     }
 
-    func setupPersonTextFieldStackConstraints() {
+    func setupPersonStackConstraints() {
         personStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             personStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             personStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            //            personStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
             personStackView.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant:330 )
         ])
     }
@@ -152,14 +157,14 @@ private extension RegistrationViewController {
         subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subTitleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 21),
-            subTitleLabel.topAnchor.constraint(equalTo: personStackView.bottomAnchor, constant: 25),
+            subTitleLabel.topAnchor.constraint(equalTo: personStackView.bottomAnchor, constant: 25)
         ])
     }
 
     func setupAddButtonConstraints() {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             addButton.topAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: 0)
         ])
     }

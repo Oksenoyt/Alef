@@ -9,8 +9,8 @@ import UIKit
 
 final class ChildView: UIView {
 
-    private let nameTextField = RegisterTextField(placeholder: "Имя ребенка")
-    private let ageTextField = RegisterTextField(placeholder: "лет")
+    private let nameTextField = RegistrationTextField(placeholder: "Имя ребенка")
+    private let ageTextField = RegistrationTextField(placeholder: "лет")
 
     lazy var deleteButton: UIButton = {
         let button = UIButton()

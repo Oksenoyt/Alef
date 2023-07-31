@@ -6,7 +6,7 @@
 //
 import UIKit
 
-final class RegisterTextField: UITextField {
+final class RegistrationTextField: UITextField {
     private let padding = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 40)
 
     init(placeholder: String) {

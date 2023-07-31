@@ -15,9 +15,8 @@
 		4204F5BD2A7599CB004074C5 /* AlefTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5BC2A7599CB004074C5 /* AlefTests.swift */; };
 		4204F5C72A7599CB004074C5 /* AlefUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5C62A7599CB004074C5 /* AlefUITests.swift */; };
 		4204F5C92A7599CB004074C5 /* AlefUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5C82A7599CB004074C5 /* AlefUITestsLaunchTests.swift */; };
-		4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D52A75B949004074C5 /* RegisterTextField.swift */; };
-		4204F5D82A76EDB2004074C5 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D72A76EDB2004074C5 /* AddButton.swift */; };
-		4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */; };
+		4204F5D62A75B949004074C5 /* RegistrationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D52A75B949004074C5 /* RegistrationTextField.swift */; };
+		4204F5DA2A76F31B004074C5 /* PersonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D92A76F31B004074C5 /* PersonStackView.swift */; };
 		4204F6022A7755BF004074C5 /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F6012A7755BF004074C5 /* ChildView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,9 +50,8 @@
 		4204F5C22A7599CB004074C5 /* AlefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4204F5C62A7599CB004074C5 /* AlefUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlefUITests.swift; sourceTree = "<group>"; };
 		4204F5C82A7599CB004074C5 /* AlefUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlefUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		4204F5D52A75B949004074C5 /* RegisterTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextField.swift; sourceTree = "<group>"; };
-		4204F5D72A76EDB2004074C5 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
+		4204F5D52A75B949004074C5 /* RegistrationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextField.swift; sourceTree = "<group>"; };
+		4204F5D92A76F31B004074C5 /* PersonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonStackView.swift; sourceTree = "<group>"; };
 		4204F6012A7755BF004074C5 /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,10 +142,9 @@
 		42301E4E2A7846E9001922E3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */,
-				4204F5D72A76EDB2004074C5 /* AddButton.swift */,
+				4204F5D52A75B949004074C5 /* RegistrationTextField.swift */,
+				4204F5D92A76F31B004074C5 /* PersonStackView.swift */,
 				4204F6012A7755BF004074C5 /* ChildView.swift */,
-				4204F5D52A75B949004074C5 /* RegisterTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,12 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */,
+				4204F5D62A75B949004074C5 /* RegistrationTextField.swift in Sources */,
 				4204F6022A7755BF004074C5 /* ChildView.swift in Sources */,
 				4204F5AA2A7599C9004074C5 /* RegistrationViewController.swift in Sources */,
 				4204F5A62A7599C9004074C5 /* AppDelegate.swift in Sources */,
-				4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */,
-				4204F5D82A76EDB2004074C5 /* AddButton.swift in Sources */,
+				4204F5DA2A76F31B004074C5 /* PersonStackView.swift in Sources */,
 				4204F5A82A7599C9004074C5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
