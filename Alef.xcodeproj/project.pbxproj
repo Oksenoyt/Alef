@@ -18,6 +18,8 @@
 		4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D52A75B949004074C5 /* RegisterTextField.swift */; };
 		4204F5D82A76EDB2004074C5 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D72A76EDB2004074C5 /* AddButton.swift */; };
 		4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */; };
+		4204F6002A77559E004074C5 /* hild.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5FF2A77559E004074C5 /* hild.swift */; };
+		4204F6022A7755BF004074C5 /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F6012A7755BF004074C5 /* ChildView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		4204F5D52A75B949004074C5 /* RegisterTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTextField.swift; sourceTree = "<group>"; };
 		4204F5D72A76EDB2004074C5 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStackView.swift; sourceTree = "<group>"; };
+		4204F5FF2A77559E004074C5 /* hild.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hild.swift; sourceTree = "<group>"; };
+		4204F6012A7755BF004074C5 /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				4204F5D92A76F31B004074C5 /* TextFieldStackView.swift */,
 				4204F5D52A75B949004074C5 /* RegisterTextField.swift */,
 				4204F5D72A76EDB2004074C5 /* AddButton.swift */,
+				4204F5FF2A77559E004074C5 /* hild.swift */,
+				4204F6012A7755BF004074C5 /* ChildView.swift */,
 			);
 			path = Alef;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4204F5D62A75B949004074C5 /* RegisterTextField.swift in Sources */,
+				4204F6022A7755BF004074C5 /* ChildView.swift in Sources */,
+				4204F6002A77559E004074C5 /* hild.swift in Sources */,
 				4204F5AA2A7599C9004074C5 /* RegistrationViewController.swift in Sources */,
 				4204F5A62A7599C9004074C5 /* AppDelegate.swift in Sources */,
 				4204F5DA2A76F31B004074C5 /* TextFieldStackView.swift in Sources */,

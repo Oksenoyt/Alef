@@ -14,30 +14,36 @@ final class RegistrationViewController: UIViewController {
 
     private let addButton = AddButton()
 
-    private var childStackViews: [TextFieldStackView] = []
+    private var childStackViews: [ChildView] = []
 
-    //    private lazy var scrollView: UIScrollView = {
-    //        let scrollView = UIScrollView()
-    //        scrollView.backgroundColor = .white
-    //        scrollView.frame = view.bounds
-    //        scrollView.contentSize = contentSize
-    //        return scrollView
-    //    }()
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.frame = view.bounds
+        scrollView.contentSize = contentSize
+        return scrollView
+    }()
 
-    //    private lazy var contentView: UIView = {
-    //        let contentView = UIView()
-    //        contentView.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1)
-    //        contentView.frame.size = contentSize
-    //        return contentView
-    //    }()
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1)
+        contentView.frame.size = contentSize
+        return contentView
+    }()
 
     //    private let personStackView: UIStackView = {
     //        let stackView = UIStackView()
     //    }()
 
-    //    private var contentSize: CGSize {
-    //        CGSize(width: view.frame.width, height: view.frame.height + 400)
-    //    }
+    private lazy var childrenStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        return stackView
+    }()
+
+    private var contentSize: CGSize {
+        CGSize(width: view.frame.width, height: view.frame.height + 230)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,10 +55,9 @@ final class RegistrationViewController: UIViewController {
     }
 
     @objc func addChildStackView() {
-        let newStackView = TextFieldStackView(type: 2)
-        view.addSubview(newStackView)
+        let newStackView = ChildView()
+        childrenStackView.addArrangedSubview(newStackView)
         childStackViews.append(newStackView)
-        setupChildTextFieldStackConstraints()
         if childStackViews.count == 5 {
             addButton.isHidden = true
         }
@@ -68,9 +73,11 @@ private extension RegistrationViewController {
         setupSubViewTitle()
         setupSubViewSubTitle()
 
-        view.addSubview(addButton)
+        contentView.addSubview(addButton)
         addActionToAddButton()
         setupAddButtonConstraints()
+        contentView.addSubview(childrenStackView)
+        setupChildTextFieldStackConstraints()
     }
 
     func settingsForTitle(title: UILabel,text: String, font: Int ) {
@@ -86,20 +93,20 @@ private extension RegistrationViewController {
 //MARK: addSubViews
 private extension RegistrationViewController {
     func addSubViewsForPersonStackView() {
-        //        view.addSubview(scrollView)
-        //        scrollView.addSubview(contentView)
-        view.addSubview(personStackView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(personStackView)
         setupPersonTextFieldStackConstraints()
     }
 
     func setupSubViewTitle() {
-        view.addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         settingsForTitle(title: titleLabel, text: "Регистрация", font: 36)
         setupTitleLableConstraints()
     }
 
     func setupSubViewSubTitle() {
-        view.addSubview(subTitleLabel)
+        contentView.addSubview(subTitleLabel)
         settingsForTitle(title: subTitleLabel, text: "Информация о детях", font: 22)
         setupSubTitleLableConstraints()
     }
@@ -112,7 +119,7 @@ private extension RegistrationViewController {
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
         ])
     }
 
@@ -122,7 +129,7 @@ private extension RegistrationViewController {
             personStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             personStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             //            personStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
-            personStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:330 )
+            personStackView.bottomAnchor.constraint(equalTo: contentView.topAnchor, constant:330 )
         ])
     }
 
@@ -143,14 +150,12 @@ private extension RegistrationViewController {
     }
 
     func setupChildTextFieldStackConstraints() {
-        for stackView in childStackViews {
-            stackView.translatesAutoresizingMaskIntoConstraints = false
+            childrenStackView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-                stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-                stackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
+                childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
             ])
         }
 
     }
-}
