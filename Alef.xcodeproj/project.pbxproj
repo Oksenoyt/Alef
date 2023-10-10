@@ -17,7 +17,7 @@
 		4204F5C92A7599CB004074C5 /* AlefUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5C82A7599CB004074C5 /* AlefUITestsLaunchTests.swift */; };
 		4204F5D62A75B949004074C5 /* RegistrationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D52A75B949004074C5 /* RegistrationTextField.swift */; };
 		4204F5DA2A76F31B004074C5 /* PersonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F5D92A76F31B004074C5 /* PersonStackView.swift */; };
-		4204F6022A7755BF004074C5 /* ChildView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F6012A7755BF004074C5 /* ChildView.swift */; };
+		4204F6022A7755BF004074C5 /* ChildStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204F6012A7755BF004074C5 /* ChildStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		4204F5C82A7599CB004074C5 /* AlefUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlefUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4204F5D52A75B949004074C5 /* RegistrationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTextField.swift; sourceTree = "<group>"; };
 		4204F5D92A76F31B004074C5 /* PersonStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonStackView.swift; sourceTree = "<group>"; };
-		4204F6012A7755BF004074C5 /* ChildView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildView.swift; sourceTree = "<group>"; };
+		4204F6012A7755BF004074C5 /* ChildStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 			children = (
 				4204F5D52A75B949004074C5 /* RegistrationTextField.swift */,
 				4204F5D92A76F31B004074C5 /* PersonStackView.swift */,
-				4204F6012A7755BF004074C5 /* ChildView.swift */,
+				4204F6012A7755BF004074C5 /* ChildStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,7 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4204F5D62A75B949004074C5 /* RegistrationTextField.swift in Sources */,
-				4204F6022A7755BF004074C5 /* ChildView.swift in Sources */,
+				4204F6022A7755BF004074C5 /* ChildStackView.swift in Sources */,
 				4204F5AA2A7599C9004074C5 /* RegistrationViewController.swift in Sources */,
 				4204F5A62A7599C9004074C5 /* AppDelegate.swift in Sources */,
 				4204F5DA2A76F31B004074C5 /* PersonStackView.swift in Sources */,

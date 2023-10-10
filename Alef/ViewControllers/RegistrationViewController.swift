@@ -11,15 +11,27 @@ final class RegistrationViewController: UIViewController {
     private let titleLabel = UILabel()
     private let subTitleLabel = UILabel()
     private let personStackView = PersonStackView()
-    private var childViews: [ChildView] = []
+
+    private lazy var childrenStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        return stackView
+    }()
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.frame = view.bounds
         scrollView.contentSize = contentSize
 
+        //по умолчанию установлен true - отображение полосы скрола справа
+        scrollView.showsVerticalScrollIndicator = false
+        //всегда прокручивается даже если контент меньше экрана
+        scrollView.alwaysBounceVertical = true
+
         // Если iOS 11 и выше, установите поведение для скролла с автоматической регулировкой контента
-//           scrollView.contentInsetAdjustmentBehavior = .automatic
+//        scrollView.contentInsetAdjustmentBehavior = .automatic
 
         return scrollView
     }()
@@ -29,13 +41,6 @@ final class RegistrationViewController: UIViewController {
         contentView.backgroundColor = #colorLiteral(red: 0.9882352941, green: 0.8, blue: 0.5490196078, alpha: 1)
         contentView.frame.size = contentSize
         return contentView
-    }()
-
-    private lazy var childrenStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
     }()
 
     private lazy var addButton: UIButton = {
@@ -59,7 +64,7 @@ final class RegistrationViewController: UIViewController {
     }()
 
     private var contentSize: CGSize {
-        CGSize(width: view.frame.width, height: view.frame.height + 220)
+        CGSize(width: view.frame.width, height: 850)
     }
 
     override func viewDidLoad() {
@@ -73,24 +78,42 @@ final class RegistrationViewController: UIViewController {
         addButton.addTarget(self, action: #selector(addChildView), for: .touchUpInside)
     }
 
+    private func addActionToClearButton() {
+        cleanButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
+    }
+
     @objc private func addChildView() {
-        let newChildView = ChildView()
-        childrenStackView.addArrangedSubview(newChildView)
-        childViews.append(newChildView)
-        newChildView.deleteButton.addTarget(self, action: #selector(deleteChild(_:)), for: .touchUpInside)
-        if childViews.count == 5 {
+        let newChildStack = ChildStackView()
+        childrenStackView.addArrangedSubview(newChildStack)
+        newChildStack.deleteButton.addTarget(self, action: #selector(deleteChild(_:)), for: .touchUpInside)
+        let subviewCount = childrenStackView.arrangedSubviews.count
+        if subviewCount == 5 {
             addButton.isHidden = true
         }
     }
 
+    @objc private func showAlert() {
+        let alert = UIAlertController(title: "Очистить форму?", message: nil, preferredStyle: .actionSheet)
+        let actionOk = UIAlertAction(title: "Сбросить данные", style: .default) { [weak self] _ in
+            if let stackView = self?.childrenStackView {
+                for subview in stackView.subviews {
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .default)
+
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
+
+        present(alert, animated: true, completion: nil)
+    }
+
     @objc private func deleteChild(_ sender: UIButton) {
-        if let childView = sender.superview as? ChildView {
+        if let childView = sender.superview as? ChildStackView {
             childrenStackView.removeArrangedSubview(childView)
             childView.removeFromSuperview()
-            if let index = childViews.firstIndex(of: childView) {
-                childViews.remove(at: index)
-            }
-            if childViews.count < 5 {
+            if childrenStackView.arrangedSubviews.count < 5 {
                 addButton.isHidden = false
             }
         }
@@ -107,9 +130,7 @@ private extension RegistrationViewController {
         setupSubViewTitle()
         setupSubViewSubTitle()
         setupSubViewAddButton()
-
-        contentView.addSubview(childrenStackView)
-        setupChildTextFieldStackConstraints()
+        setupSubViewСhildrenStackView()
         setupSubViewCleanButton()
     }
 
@@ -141,6 +162,11 @@ private extension RegistrationViewController {
         setupSubTitleLableConstraints()
     }
 
+    func setupSubViewСhildrenStackView() {
+        contentView.addSubview(childrenStackView)
+        setupСhildrenStackViewConstraints()
+    }
+
     func setupSubViewAddButton() {
         contentView.addSubview(addButton)
         addActionToAddButton()
@@ -149,7 +175,7 @@ private extension RegistrationViewController {
 
     func setupSubViewCleanButton() {
         contentView.addSubview(cleanButton)
-        //        addActionToAddButton()
+        addActionToClearButton()
         setupCleanButtonConstraints()
     }
 
@@ -183,20 +209,20 @@ private extension RegistrationViewController {
         ])
     }
 
+    func setupСhildrenStackViewConstraints() {
+        childrenStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            childrenStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            childrenStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25)
+        ])
+    }
+
     func setupAddButtonConstraints() {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             addButton.topAnchor.constraint(equalTo: subTitleLabel.topAnchor, constant: 0)
-        ])
-    }
-
-    func setupChildTextFieldStackConstraints() {
-        childrenStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            childrenStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            childrenStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            childrenStackView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 25 )
         ])
     }
 
